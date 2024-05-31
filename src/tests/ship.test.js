@@ -151,3 +151,173 @@ Carrier.direction="north";
 
 
   })
+
+
+  describe("attacking ships",()=>{
+    let destroyer=new shipClasses.Destroyer("north");
+    let carrier=new shipClasses.Carrier("east");
+    let battleship=new shipClasses.BattleShip("north");
+    let cruiser=new shipClasses.Cruiser("east");
+    let submarine=new shipClasses.Submarine("east");
+
+    let opponent=new shipClasses.player("opp");
+
+    opponent.board.placeShip(opponent.board.playerBoard,new shipClasses.coordinates(1,2),destroyer)
+    opponent.board.placeShip(opponent.board.playerBoard,new shipClasses.coordinates(3,5),carrier)
+    opponent.board.placeShip(opponent.board.playerBoard,new shipClasses.coordinates(9,2),battleship)
+    opponent.board.placeShip(opponent.board.playerBoard,new shipClasses.coordinates(4,8),cruiser)
+    opponent.board.placeShip(opponent.board.playerBoard,new shipClasses.coordinates(0,9),submarine)
+
+    opponent.board.addShip(submarine)
+    opponent.board.addShip(destroyer)
+    opponent.board.addShip(carrier)
+    opponent.board.addShip(battleship)
+    opponent.board.addShip(cruiser);
+
+    let ships=[submarine,destroyer,carrier,battleship,cruiser]
+
+    // ships[ships.length].sendShots()
+    test('the board should look like this after placing the ships', () => {
+        expect(opponent.board.playerBoard).toStrictEqual(
+
+            [
+                [0,0,5,0,0,0,0,4,4,4],
+                [0,0,5,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,1,1,1,1,1],
+                [0,0,0,0,0,0,3,3,3,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0]
+            ]
+    
+        )
+    });
+
+describe('sending attacks', () => {
+    test('send shots', () => {
+
+        expect( opponent.board.sendShots(new shipClasses.coordinates(2,3),opponent.board.playerBoard).board).toStrictEqual(
+        
+            [
+                [0,0,5,0,0,0,0,4,4,4],
+                [0,0,5,0,0,0,0,0,0,0],
+                [0,0,0,"08",0,0,0,0,0,0],
+                [0,0,0,0,0,1,1,1,1,1],
+                [0,0,0,0,0,0,3,3,3,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0]
+            ]
+        )
+        
+        expect( submarine.sendShots(new shipClasses.coordinates(9,1),opponent.board.playerBoard).board).toStrictEqual(
+        
+            [
+                [0,0,5,0,0,0,0,4,4,4],
+                [0,0,5,0,0,0,0,0,0,0],
+                [0,0,0,"08",0,0,0,0,0,0],
+                [0,0,0,0,0,1,1,1,1,1],
+                [0,0,0,0,0,0,3,3,3,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,"08",2,0,0,0,0,0,0,0]
+            ]
+        )
+        
+        expect( submarine.sendShots(new shipClasses.coordinates(8,2),opponent.board.playerBoard).board).toStrictEqual(
+        
+            [
+                [0,0,5,0,0,0,0,4,4,4],
+                [0,0,5,0,0,0,0,0,0,0],
+                [0,0,0,"08",0,0,0,0,0,0],
+                [0,0,0,0,0,1,1,1,1,1],
+                [0,0,0,0,0,0,3,3,3,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,0,"28",0,0,0,0,0,0,0],
+                [0,"08",2,0,0,0,0,0,0,0]
+            ]
+        )
+        expect( submarine.sendShots(new shipClasses.coordinates(0,7),opponent.board.playerBoard).board).toStrictEqual(
+        
+            [
+                [0,0,5,0,0,0,0,"48",4,4],
+                [0,0,5,0,0,0,0,0,0,0],
+                [0,0,0,"08",0,0,0,0,0,0],
+                [0,0,0,0,0,1,1,1,1,1],
+                [0,0,0,0,0,0,3,3,3,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,0,"28",0,0,0,0,0,0,0],
+                [0,"08",2,0,0,0,0,0,0,0]
+            ]
+        )
+        
+        expect( submarine.shipStruck(new shipClasses.coordinates(0,7),opponent.board.playerBoard)).toBeTruthy()
+        
+        expect (submarine.shipStruck(new shipClasses.coordinates(9,1),opponent.board.playerBoard)).toBeFalsy()
+        
+        // expect(opponent.board.receiveAttack(8,2))
+               
+                
+        //     });
+          
+        
+        
+        
+        
+        
+          
+        }
+        
+        
+        )})  
+
+
+        describe('receiving attacks', () => {
+
+            test('the board should look like this after placing the ships', () => {
+                expect(opponent.board.playerBoard).toStrictEqual(
+[
+                [0,0,5,0,0,0,0,"48",4,4],
+                [0,0,5,0,0,0,0,0,0,0],
+                [0,0,0,"08",0,0,0,0,0,0],
+                [0,0,0,0,0,1,1,1,1,1],
+                [0,0,0,0,0,0,3,3,3,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,0,2,0,0,0,0,0,0,0],
+                [0,0,"28",0,0,0,0,0,0,0],
+                [0,"08",2,0,0,0,0,0,0,0]
+            ]
+            
+                )
+            });
+
+            test('ship list for board', () => {
+                expect(opponent.board.ships).toStrictEqual(ships);
+            });
+
+          
+            test('board gets attack', () => {
+                // expect(submarine.shipStruck(new shipClasses.coordinates(0,7),opponent.board.playerBoard)).toBeTruthy();
+                // cruiser.sendShots(new shipClasses.coordinates(4,8),opponent.board.playerBoard);
+                // expect(cruiser.shipStruck(new shipClasses.coordinates(4,8),opponent.board.playerBoard)).toBeTruthy();
+                expect(opponent.board.receiveAttack(new shipClasses.coordinates(4,8),opponent.board.playerBoard)).toBeTruthy();
+               
+                
+            });
+            
+        });
+});
+
+
