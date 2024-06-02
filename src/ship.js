@@ -6,7 +6,7 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
 
     class Ship{
         #length;
-        #hitFrequency;
+        #hitFrequency=0;
         #sunk;
         shipNumberEquivalent;
         occupationGrid;
@@ -39,6 +39,8 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
     
         hit(){
             this.#hitFrequency+=1;
+
+      
         }
     
         isSunk(){
@@ -108,8 +110,8 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
       this.ships.add(ship)
       }
     
-  receiveAttack(coordinates,board){
-this.sendShots(coordinates,board)
+  receiveAttack(coordinates,board=this.playerBoard){
+    this.sendShots(coordinates,board)
     for (let i = 0; i < this.ships.size(); i++) {
        if(this.ships[i].shipStruck(coordinates,board)){
         return true
@@ -119,6 +121,18 @@ this.sendShots(coordinates,board)
 
     return false;
        
+    }
+
+    lostGame(ships=this.ships){
+        let fallenships=0;
+        for (let i = 0; i <ships.size(); i++) {
+            if(ships[i].isSunk()){
+            fallenships++;
+            }
+             
+         }  
+
+         return fallenships===ships.size();
     }
         missedAttacks(){
     

@@ -1,3 +1,4 @@
+const ArrayList = require('arraylist');
 const shipClasses=require('../ship')
 let gameboard= new shipClasses.Gameboard();
 
@@ -174,7 +175,8 @@ Carrier.direction="north";
     opponent.board.addShip(battleship)
     opponent.board.addShip(cruiser);
 
-    let ships=[submarine,destroyer,carrier,battleship,cruiser]
+    let ships=new ArrayList;
+   ships.add( [submarine,destroyer,carrier,battleship,cruiser])
 
     // ships[ships.length].sendShots()
     test('the board should look like this after placing the ships', () => {
@@ -309,13 +311,38 @@ describe('sending attacks', () => {
 
           
             test('board gets attack', () => {
-                // expect(submarine.shipStruck(new shipClasses.coordinates(0,7),opponent.board.playerBoard)).toBeTruthy();
-                // cruiser.sendShots(new shipClasses.coordinates(4,8),opponent.board.playerBoard);
-                // expect(cruiser.shipStruck(new shipClasses.coordinates(4,8),opponent.board.playerBoard)).toBeTruthy();
+
                 expect(opponent.board.receiveAttack(new shipClasses.coordinates(4,8),opponent.board.playerBoard)).toBeTruthy();
+                expect(opponent.board.receiveAttack(new shipClasses.coordinates(5,8),opponent.board.playerBoard)).toBeFalsy();
                
                 
             });
+            test('sink a ship', () => {
+                opponent.board.receiveAttack(new shipClasses.coordinates(0,8),opponent.board.playerBoard)
+                opponent.board.receiveAttack(new shipClasses.coordinates(0,9),opponent.board.playerBoard)
+
+                expect(submarine.isSunk()).toBeTruthy();
+                expect(carrier.isSunk()).toBeFalsy();
+                
+            });
+
+
+            test('lostGame', () => {
+               expect(opponent.board.lostGame(ships)).toBeFalsy(); 
+               negate()
+               expect(opponent.board.lostGame(ships)).toBeTruthy();
+               
+            });
+
+
+            function negate() {
+                ships.forEach(ship=>{
+                    let mockedIsSunk=jest.fn(ship.isSunk())
+                    mockedIsSunk.mockReturnValue(true);
+                    ship.isSunk=mockedIsSunk
+                })
+                
+            }
             
         });
 });

@@ -35,8 +35,12 @@ for (let index = 0; index<3; index++) {
     let cordinates3=new shipClasses.coordinates(parseInt(prompt("enter")),parseInt(prompt("enter")));
     player.board.placeShip(player.board.playerBoard,cordinates3,createShips().destroyer);
 
-    
+    player.board.addShip(createShips().destroyer);
 };
+
+[createShips().battleship,createShips().carrier,createShips().cruiser,createShips().destroyer].forEach(ship=>{
+   player.board.addShip(ship);
+})
 
 
 
@@ -44,7 +48,37 @@ for (let index = 0; index<3; index++) {
 }
 
 
-return{setUpShips}
+
+function play() {
+   setUpShips(playerOne);
+   setUpShips(playerTwo);
+   while (!(playerOne.board.lostGame()||playerTwo.board.lostGame())) {
+      exchangingAttacks()
+   
+   }
+   
+   return determineWinner();
+}
+
+function determineWinner() {
+   if(playerOne.board.lostGame()){
+
+      return playerOne.name;
+   }
+   
+   return playerTwo.name
+}
+
+function exchangingAttacks() {
+   
+   playerTwo.board.receiveAttack(new shipClasses.coordinates(prompt("attack coordinate"),prompt("attack coordinate")))
+   playerOne.board.receiveAttack(new shipClasses.coordinates(prompt("attack coordinate"),prompt("attack coordinate")))
+   
+   
+}
+
+
+return{play}
 
 })()
 
