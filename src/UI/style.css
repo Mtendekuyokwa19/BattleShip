@@ -1,0 +1,67 @@
+div{
+   
+
+    /* border: solid red 3px; */
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:12px;
+}
+
+#gameBoardHolder{
+    border: blue solid 3px;
+    display: flex;
+    width: 1000px;
+    height: 450px;
+    justify-content: space-between;
+
+}
+
+#userGameBoard,#computerGameBoard{
+
+    width: 450px;
+    height: 450px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+#userGameBoard, #computerGameBoard{
+   
+
+    button{
+        width: 40px;
+        height: 40px;
+        background-color: white;
+        border: 1.5px solid black;
+        box-shadow:  3px 3px  black;
+        border-radius: 10px;
+    }
+}
+
+#computerGameBoard{
+    background-color: #FF8577;
+}
+#userGameBoard{
+    background-color: #699BF7;
+}
+#shipBoard{
+    width: 500px;
+    height: 150px;
+
+}
+
+button{
+    background-color: blue;
+    width: 30px;
+    height: 30px;
+}
+#userGameBoard>div, #computerGameBoard>div{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-evenly;
+}
