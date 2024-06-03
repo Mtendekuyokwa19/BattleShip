@@ -29,17 +29,18 @@ class createElementtoDom{
   
   export let Gameboards=(()=>{
 let body=document.querySelector('body');
+let titleBoard=createElementtoDom.domElementCreator('div',"titleBoard",body)
 
-  let GameBoardsHolder=createElementtoDom.domElementCreator('div',"gameBoardHolder",body)
+let GameBoardsHolder=createElementtoDom.domElementCreator('div',"gameBoardHolder",body)
     let userGameBoard=createElementtoDom.domElementCreator('div',"userGameBoard",GameBoardsHolder);
     let computerGameBoard=createElementtoDom.domElementCreator('div',"computerGameBoard",GameBoardsHolder)
   let shipBoard=createElementtoDom.domElementCreator('div',"shipBoard",body)  
 
-    return {userGameBoard,computerGameBoard}
+    return {userGameBoard,computerGameBoard,titleBoard,shipBoard}
   })()
 
 
-  let userGameBoardManager=(()=>{
+  let GameBoardManager=(()=>{
    
     function shipButtons(board) {
 
@@ -62,3 +63,23 @@ let body=document.querySelector('body');
 
   })()
   
+  let titleBoardManager=(()=>{
+
+    
+    
+
+    let playerButton=createElementtoDom.domElementCreator('button',"playerButton",Gameboards.titleBoard)
+    playerButton.textContent="Your Board"
+
+    let title=createElementtoDom.domElementCreator('h2',"title",Gameboards.titleBoard,"BATTLESHIP")
+    let computerButton=createElementtoDom.domElementCreator('button',"computerButton",Gameboards.titleBoard)
+    computerButton.textContent="Computer's Board"
+
+  })()
+
+  let noticeBoad=(()=>{
+
+    let notice=createElementtoDom.domElementCreator('h1',"noticeBoard",Gameboards.shipBoard);
+    notice.textContent="Let's Play!!!"  
+
+  })()
