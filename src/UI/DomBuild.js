@@ -1,6 +1,6 @@
  import './style.css';
 
-class createElementtoDom{
+export class createElementtoDom{
 
     static domElementCreator(type,newId,parentBox,Words="",placeholderWords=""){
       let newElement=document.createElement(type)
@@ -21,6 +21,15 @@ class createElementtoDom{
       
         return myIcon;
           
+      }
+
+      static deleteChild(parentSelector,childSelector){
+        
+      // parentSelector.removeChild(childSelector);
+      }
+
+      static deleteElement(element){
+        element.remove();
       }
       
   
@@ -49,6 +58,8 @@ let GameBoardsHolder=createElementtoDom.domElementCreator('div',"gameBoardHolder
 
         for (let x = 0; x <10; x++) {
           let button=createElementtoDom.domElementCreator("button","button"+i,lineSetGrid)
+          button.className="buttonUser"
+       
           
           
         }
