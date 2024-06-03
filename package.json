@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@types/jest": "^29.5.12",
-    "arraylist": "^0.1.0"
+    "arraylist": "^0.1.0",
+    "normalize.css": "^8.0.1"
   }
 }

@@ -1,4 +1,3 @@
-                                                                                    
 
 body{
     display: flex;
@@ -105,8 +104,19 @@ button{
 
     width: 25px;
     height: 25px;
+    
 
 }
+#hit{
+    width: 23px;
+    height: 21.5px;
+}
 
-/* .strike */
+#miss{
+   
+    width: 23px;
+    height: 21.5px;
+    
+    
+}
 

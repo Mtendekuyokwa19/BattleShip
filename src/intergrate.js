@@ -3,6 +3,8 @@ import shipMovement, { playerOne, playerTwo } from './shipMovement';
 import Icon from './UI/icons/ship.png';
 import { createElementtoDom } from "./UI/DomBuild";
 import shipClasses from './ship';
+import miss from './UI/icons/water.png'
+import hitIcon from './UI/icons/hit.png';
 
 export let loadIconsOnButtons=(()=>{
 
@@ -22,18 +24,25 @@ function LoadBoard(boardPlayer,allBoardButton) {
         for (let j = 0; j < boardPlayer[i].length; j++) {
            
 
-            console.log(boardPlayer[i][j],isNaN(boardPlayer[i][j]))
+        
             if ((boardPlayer[i][j]>7)) {
            
                 if (parseFloat(boardPlayer[i][j])==8) {
                     allBoardButton[counter].textContent="-";
+                    allBoardButton[counter].className="missed"
+                    missedAttack(allBoardButton[counter]);
+                    
                   
                     
 
                 }
                 else{
-                    allBoardButton[counter].textContent="X";  
+                     
+                    allBoardButton[counter].className="hit"
+                    hitAttacks(allBoardButton[counter])
                 }
+
+                allBoardButton[counter].disabled=true;
                
             }
             else{
@@ -48,18 +57,32 @@ function LoadBoard(boardPlayer,allBoardButton) {
     }
     
 }
-
-function clearButton() {
+function missedAttack(button) {
+    let missedBtn=createElementtoDom.ImageLoadtoDOm(miss,button,"miss")
+    button.style.backgroundColor="#219ebc"
     
-// createElementtoDom.deleteChild(Button,child);
-document.querySelectorAll('#computerGameBoard #icon').forEach(element=>{
+}
+
+function hitAttacks(button) {
+    let hit=createElementtoDom.ImageLoadtoDOm(hitIcon,button,"hit")
+    hit.id="icon";
+    button.style.backgroundColor="#bb0a1e"
+    
+}
+
+function clearButton(selector='#computerGameBoard #icon') {
+    
+
+document.querySelectorAll(selector).forEach(element=>{
     element.remove();
 })
+
+
 
     
 }
 
-return {LoadBoard,boardPlayer,computerPlayer,allBoardButtonComputer,allBoardButtonsUser};
+return {LoadBoard,boardPlayer,computerPlayer,allBoardButtonComputer,allBoardButtonsUser,clearButton};
 })()
 
 let buttonManager=(()=>{
@@ -70,15 +93,31 @@ let buttonManager=(()=>{
        
 
         shipMovement.playerTwo.board.receiveAttack(new shipClasses.coordinates(xCoordinate,yCoordinate),shipMovement.playerTwo.board.playerBoard);
+        
         loadIconsOnButtons.LoadBoard(playerTwo.board.playerBoard,loadIconsOnButtons.allBoardButtonComputer);
+        computersTurn();
+        
      
     }
     function gettingAttacked(xCoordinate,yCoordinate) {
         shipMovement.playerOne.board.receiveAttack(new shipClasses.coordinates(xCoordinate,yCoordinate),shipMovement.playerOne.board.playerBoard);
+        
         loadIconsOnButtons.LoadBoard(playerOne.board.playerBoard,loadIconsOnButtons.allBoardButtonsUser);
+        loadIconsOnButtons.LoadBoard(playerTwo.board.playerBoard,loadIconsOnButtons.allBoardButtonComputer);
+        
         
     }
 
+    function computersTurn() {
+        
+        setTimeout(() => {
+            loadIconsOnButtons.clearButton('#userGameBoard #icon')
+            gettingAttacked(shipMovement.getRandomInt(7),shipMovement.getRandomInt(9))
+            
+        }, 100);
+        
+       
+    }
 
 
     function tieButtonToGrid() {
@@ -88,9 +127,10 @@ let buttonManager=(()=>{
            for (let x = 0; x <10; x++) {
             computerButtons[counter].addEventListener('click',()=>{
                     attackCoordinates(i,x);
-                    console.log(i,x);
-
+                  
+                
             })
+
             
             counter++;
            }
@@ -100,5 +140,6 @@ let buttonManager=(()=>{
     }
 
 tieButtonToGrid()
+
 
 })()
