@@ -59,14 +59,14 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
         }
 
         shipStruck(coordinates,board){
-
+            this.#addtodeadzone(coordinates);
             if((board[coordinates.xCoordinate][coordinates.yCoordinate])===(this.shipNumberEquivalent+"8")){
 
                 this.hit();
                 this.#addtodeadzone(coordinates);
                 return true
             }   
-           
+          
             return false;
         }
 
@@ -109,9 +109,15 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
       addShip(ship){
       this.ships.add(ship)
       }
+    #alreadyExistingAttacks=[];  
     
   receiveAttack(coordinates,board=this.playerBoard){
+    if (this.missedAttacks(coordinates)) {
+        return
+    }
     this.sendShots(coordinates,board)
+    this.addCoordinates(coordinates)
+
     for (let i = 0; i < this.ships.size(); i++) {
        if(this.ships[i].shipStruck(coordinates,board)){
         return true
@@ -122,6 +128,8 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
     return false;
        
     }
+
+
 
     lostGame(ships=this.ships){
         let fallenships=0;
@@ -134,9 +142,23 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
 
          return fallenships===ships.size();
     }
-        missedAttacks(){
+        missedAttacks(coordinates){
+            for (let x = 0; x < this.#alreadyExistingAttacks.length; x++) {
+                if (this.#alreadyExistingAttacks[x]===coordinates) {
+
+                    return true
+                }
+                
+            }
+
+            return false
     
-        }  
+        } 
+        
+        addCoordinates(coordinates){
+            this.#alreadyExistingAttacks[this.#alreadyExistingAttacks.length]=coordinates
+
+        }
         
         
      placeShip(opponent,coordinates,Ship){

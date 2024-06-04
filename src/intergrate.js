@@ -18,26 +18,29 @@ export let loadIconsOnButtons=(()=>{
 
 function LoadBoard(boardPlayer,allBoardButton) {
     clearButton();   
+  
+   
 
   let counter=0;
     for (let i = 0; i < boardPlayer.length; i++) {
         for (let j = 0; j < boardPlayer[i].length; j++) {
            
 
-        
-            if ((boardPlayer[i][j]>7)) {
+        if ((boardPlayer[i][j]>7)) {
            
-                if (parseFloat(boardPlayer[i][j])==8) {
-                    allBoardButton[counter].textContent="-";
+                if (parseInt(boardPlayer[i][j])==8) {
+                   
                     allBoardButton[counter].className="missed"
+                   
+                
                     missedAttack(allBoardButton[counter]);
                     
                   
                     
 
                 }
-                else{
-                     
+                else if((boardPlayer[i][j])>10){
+                    
                     allBoardButton[counter].className="hit"
                     hitAttacks(allBoardButton[counter])
                 }
@@ -58,12 +61,15 @@ function LoadBoard(boardPlayer,allBoardButton) {
     
 }
 function missedAttack(button) {
+  
     let missedBtn=createElementtoDom.ImageLoadtoDOm(miss,button,"miss")
+    missedBtn.id="icon"
     button.style.backgroundColor="#219ebc"
     
 }
 
 function hitAttacks(button) {
+  
     let hit=createElementtoDom.ImageLoadtoDOm(hitIcon,button,"hit")
     hit.id="icon";
     button.style.backgroundColor="#bb0a1e"
