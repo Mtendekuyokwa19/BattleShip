@@ -1,6 +1,8 @@
+import { modalForWin } from './UI/DomBuild';
+
 const shipClasses=require('./ship')
 
-let shipMovement=(()=>{
+export let shipMovement=(()=>{
 
 let playerOne=new shipClasses.player("playerOne");
 let playerTwo=new shipClasses.player("playerTwo")
@@ -68,6 +70,21 @@ function play() {
    return determineWinner();
 }
 
+function endGame() {
+  
+   if(playerOne.board.lostGame()||playerTwo.board.lostGame()){
+      
+      if(playerOne.board.lostGame()){
+         
+            modalForWin.showMessage("player one")
+      }
+      else{
+         modalForWin.showMessage("player Two")
+      }
+   }
+   
+}
+
 function determineWinner() {
    if(playerOne.board.lostGame()){
 
@@ -88,9 +105,6 @@ function getRandomInt(max) {
    return Math.floor(Math.random() * max);
  }
 
-return{play,setUpShips,playerOne,playerTwo,getRandomInt}
+return{play,setUpShips,playerOne,playerTwo,getRandomInt,endGame}
 
 })()
-
-
-module.exports=shipMovement;

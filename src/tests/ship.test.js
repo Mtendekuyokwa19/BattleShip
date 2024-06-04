@@ -321,6 +321,7 @@ describe('sending attacks', () => {
                 opponent.board.receiveAttack(new shipClasses.coordinates(0,8),opponent.board.playerBoard)
                 opponent.board.receiveAttack(new shipClasses.coordinates(0,9),opponent.board.playerBoard)
 
+                
                 expect(submarine.isSunk()).toBeTruthy();
                 expect(carrier.isSunk()).toBeFalsy();
                 
@@ -328,20 +329,28 @@ describe('sending attacks', () => {
 
 
             test('lostGame', () => {
-               expect(opponent.board.lostGame(ships)).toBeFalsy(); 
-               negate()
-               expect(opponent.board.lostGame(ships)).toBeTruthy();
+               expect(opponent.board.lostGame()).toBeFalsy(); 
+               negate(opponent.board.playerBoard)
+            
+               expect(opponent.board.lostGame(negate(opponent.board.playerBoard))).toBeTruthy();
                
             });
 
 
-            function negate() {
-                ships.forEach(ship=>{
-                    let mockedIsSunk=jest.fn(ship.isSunk())
-                    mockedIsSunk.mockReturnValue(true);
-                    ship.isSunk=mockedIsSunk
-                })
-                
+            function negate(board) {
+              board=[
+                [0,0,0,0,0,0,0,"48",0,"48"],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,"08",0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,"28",0,0,0,0,0,0,0],
+                [0,"08",0,0,0,0,0,0,0,0]
+            ]
+                return board
             }
             
         });

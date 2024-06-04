@@ -1,5 +1,5 @@
-import shipMovement, { playerOne, playerTwo } from './shipMovement';
-
+import  { playerOne, playerTwo } from './shipMovement';
+import { shipMovement } from './shipMovement';
 import Icon from './UI/icons/ship.png';
 import { createElementtoDom } from "./UI/DomBuild";
 import shipClasses from './ship';
@@ -7,7 +7,6 @@ import miss from './UI/icons/water.png'
 import hitIcon from './UI/icons/hit.png';
 
 export let loadIconsOnButtons=(()=>{
-
     // let shipIcon=createElementtoDom.ImageLoadtoDOm()
 
     let boardPlayer=shipMovement.setUpShips(shipMovement.playerOne);
@@ -19,7 +18,7 @@ export let loadIconsOnButtons=(()=>{
 function LoadBoard(boardPlayer,allBoardButton) {
     clearButton();   
   
-   
+
 
   let counter=0;
     for (let i = 0; i < boardPlayer.length; i++) {
@@ -28,9 +27,9 @@ function LoadBoard(boardPlayer,allBoardButton) {
 
         if ((boardPlayer[i][j]>7)) {
            
-                if (parseInt(boardPlayer[i][j])==8) {
+                if ((boardPlayer[i][j])==8) {
                    
-                    allBoardButton[counter].className="missed"
+                    allBoardButton[counter].className="missed";
                    
                 
                     missedAttack(allBoardButton[counter]);
@@ -96,26 +95,29 @@ let buttonManager=(()=>{
     let computerButtons=document.querySelectorAll('#computerGameBoard .buttonUser');
 
     function attackCoordinates(xCoordinate,yCoordinate) {
+      
        
-
+       
         shipMovement.playerTwo.board.receiveAttack(new shipClasses.coordinates(xCoordinate,yCoordinate),shipMovement.playerTwo.board.playerBoard);
         
-        loadIconsOnButtons.LoadBoard(playerTwo.board.playerBoard,loadIconsOnButtons.allBoardButtonComputer);
+        loadIconsOnButtons.LoadBoard(shipMovement.playerTwo.board.playerBoard,loadIconsOnButtons.allBoardButtonComputer);
         computersTurn();
+
+        console.log(shipMovement.playerOne.board.playerBoard,shipMovement.playerTwo.board.playerBoard)
         
      
     }
-    function gettingAttacked(xCoordinate,yCoordinate) {
+    function gettingAttacked(xCoordinate,yCoordinate) {shipMovement.endGame()
         shipMovement.playerOne.board.receiveAttack(new shipClasses.coordinates(xCoordinate,yCoordinate),shipMovement.playerOne.board.playerBoard);
         
-        loadIconsOnButtons.LoadBoard(playerOne.board.playerBoard,loadIconsOnButtons.allBoardButtonsUser);
-        loadIconsOnButtons.LoadBoard(playerTwo.board.playerBoard,loadIconsOnButtons.allBoardButtonComputer);
+        loadIconsOnButtons.LoadBoard(shipMovement.playerOne.board.playerBoard,loadIconsOnButtons.allBoardButtonsUser);
+        loadIconsOnButtons.LoadBoard(shipMovement.playerTwo.board.playerBoard,loadIconsOnButtons.allBoardButtonComputer);
         
         
     }
 
     function computersTurn() {
-        
+       
         setTimeout(() => {
             loadIconsOnButtons.clearButton('#userGameBoard #icon')
             gettingAttacked(shipMovement.getRandomInt(7),shipMovement.getRandomInt(9))
@@ -132,7 +134,9 @@ let buttonManager=(()=>{
 
            for (let x = 0; x <10; x++) {
             computerButtons[counter].addEventListener('click',()=>{
+                   
                     attackCoordinates(i,x);
+                    shipMovement.endGame()
                   
                 
             })

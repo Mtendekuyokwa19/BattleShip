@@ -95,3 +95,19 @@ let GameBoardsHolder=createElementtoDom.domElementCreator('div',"gameBoardHolder
     notice.textContent="Let's Play!!!"  
 
   })()
+
+  export let modalForWin=(()=>{
+
+    function showMessage(message) {
+      let winBox=createElementtoDom.domElementCreator('dialog',"winBox",document.querySelector('body'))
+      let statusMessage=createElementtoDom.domElementCreator('p',"messageModal",winBox,message)
+
+      let restart=createElementtoDom.domElementCreator('button','restart',winBox)
+
+    winBox.showModal();
+    }
+    
+    
+
+return {showMessage}
+  })()

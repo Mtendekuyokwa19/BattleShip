@@ -6,7 +6,7 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
 
     class Ship{
         #length;
-        #hitFrequency=0;
+        hitFrequency=0;
         #sunk;
         shipNumberEquivalent;
         occupationGrid;
@@ -20,7 +20,7 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
         }
         set hitFrequency(hitFrequency){
     
-            this.#hitFrequency=hitFrequency;
+            this.hitFrequency=hitFrequency;
         }
         set sunk(sunk){
             this.#sunk=sunk
@@ -31,24 +31,24 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
             return this.#length;
         }
         get hitFrequency(){
-            return this.#hitFrequency;
+            return this.hitFrequency;
         }
         get sunk(){
             return this.#sunk;
         }
     
         hit(){
-            this.#hitFrequency+=1;
+            this.hitFrequency+=1;
 
       
         }
     
         isSunk(){
-            return this.#hitFrequency===this.#length;
+            return this.hitFrequency===this.#length;
         }
 
          sendShots(coordinates,board){
-            if (this.#alreadyHit(coordinates)) {
+            if (board[coordinates.xCoordinate][coordinates.yCoordinate]==8) {
               
                 return;
             }
@@ -112,35 +112,43 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
     #alreadyExistingAttacks=[];  
     
   receiveAttack(coordinates,board=this.playerBoard){
+    
+
     if (this.missedAttacks(coordinates)) {
         return
     }
     this.sendShots(coordinates,board)
-    this.addCoordinates(coordinates)
+    
 
     for (let i = 0; i < this.ships.size(); i++) {
        if(this.ships[i].shipStruck(coordinates,board)){
+      
         return true
        }
         
     }
-
+    this.addCoordinates(coordinates)
     return false;
        
     }
 
 
 
-    lostGame(ships=this.ships){
-        let fallenships=0;
-        for (let i = 0; i <ships.size(); i++) {
-            if(ships[i].isSunk()){
-            fallenships++;
-            }
-             
-         }  
+    lostGame(board=this.playerBoard){
+       
 
-         return fallenships===ships.size();
+        for (let i = 0; i < 10; i++) {
+           for (let x = 0; x < 10; x++) {
+            if (parseInt(board[i][x])>0&&parseInt(board[i][x])<8) {
+               
+                return false
+            }
+           }
+            
+        }
+
+        return true;
+      
     }
         missedAttacks(coordinates){
             for (let x = 0; x < this.#alreadyExistingAttacks.length; x++) {
