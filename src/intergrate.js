@@ -165,7 +165,7 @@ let buttonManager=(()=>{
             gettingAttacked(shipMovement.getRandomInt(10),shipMovement.getRandomInt(10))
            
             
-        }, 1000);
+        }, 2000);
         
      
     }
