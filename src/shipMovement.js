@@ -4,8 +4,8 @@ const shipClasses=require('./ship')
 
 export let shipMovement=(()=>{
 
-let playerOne=new shipClasses.player("playerOne");
-let playerTwo=new shipClasses.player("playerTwo")
+let playerOne=new shipClasses.player("user");
+let playerTwo=new shipClasses.player("computer")
 
 function createShips() {
 
@@ -76,10 +76,10 @@ function endGame() {
       
       if(playerOne.board.lostGame()){
          
-            modalForWin.showMessage("player one")
+            modalForWin.showMessage("Sorry,Computer won this round")
       }
       else{
-         modalForWin.showMessage("player Two")
+         modalForWin.showMessage("Congratulations!!! You Win")
       }
    }
    

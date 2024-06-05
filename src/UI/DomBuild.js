@@ -75,7 +75,7 @@ let GameBoardsHolder=createElementtoDom.domElementCreator('div',"gameBoardHolder
 
   })()
   
-  let titleBoardManager=(()=>{
+  export let titleBoardManager=(()=>{
 
     
     
@@ -83,16 +83,17 @@ let GameBoardsHolder=createElementtoDom.domElementCreator('div',"gameBoardHolder
     let playerButton=createElementtoDom.domElementCreator('button',"playerButton",Gameboards.titleBoard)
     playerButton.textContent="Your Board"
 
-    let title=createElementtoDom.domElementCreator('h2',"title",Gameboards.titleBoard,"BATTLESHIP")
+    let title=createElementtoDom.domElementCreator('h2',"title",Gameboards.titleBoard,"Let's Play")
     let computerButton=createElementtoDom.domElementCreator('button',"computerButton",Gameboards.titleBoard)
     computerButton.textContent="Computer's Board"
 
+return{title}
   })()
 
   let noticeBoad=(()=>{
 
     let notice=createElementtoDom.domElementCreator('h1',"noticeBoard",Gameboards.shipBoard);
-    notice.textContent="Let's Play!!!"  
+    notice.textContent="BATTLESHIP"  
 
   })()
 
@@ -101,8 +102,9 @@ let GameBoardsHolder=createElementtoDom.domElementCreator('div',"gameBoardHolder
     function showMessage(message) {
       let winBox=createElementtoDom.domElementCreator('dialog',"winBox",document.querySelector('body'))
       let statusMessage=createElementtoDom.domElementCreator('p',"messageModal",winBox,message)
-
-      let restart=createElementtoDom.domElementCreator('button','restart',winBox)
+      winBox.className="dialog"
+      let restart=createElementtoDom.domElementCreator('button','restart',winBox,"Restart");
+      restart.className="nb-button orange"
 
     winBox.showModal();
     }

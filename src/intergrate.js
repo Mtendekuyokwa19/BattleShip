@@ -1,7 +1,7 @@
 import  { playerOne, playerTwo } from './shipMovement';
 import { shipMovement } from './shipMovement';
 import Icon from './UI/icons/ship.png';
-import { createElementtoDom } from "./UI/DomBuild";
+import { createElementtoDom, titleBoardManager } from "./UI/DomBuild";
 import shipClasses from './ship';
 import miss from './UI/icons/water.png'
 import hitIcon from './UI/icons/hit.png';
@@ -59,6 +59,47 @@ function LoadBoard(boardPlayer,allBoardButton) {
     }
     
 }
+
+function LoadBoardComputer(boardPlayer,allBoardButton) {
+    clearButton();   
+  
+
+
+    let counter=0;
+      for (let i = 0; i < boardPlayer.length; i++) {
+          for (let j = 0; j < boardPlayer[i].length; j++) {
+             
+  
+          if ((boardPlayer[i][j]>7)) {
+             
+                  if ((boardPlayer[i][j])==8) {
+                     
+                      allBoardButton[counter].className="missed";
+                     
+                  
+                      missedAttack(allBoardButton[counter]);
+                      
+                    
+                      
+  
+                  }
+                  else if((boardPlayer[i][j])>10){
+                      
+                      allBoardButton[counter].className="hit"
+                      hitAttacks(allBoardButton[counter])
+                  }
+  
+                  allBoardButton[counter].disabled=true;
+                 
+              }
+             
+              counter++;
+          }
+          
+      }
+      
+    
+}
 function missedAttack(button) {
   
     let missedBtn=createElementtoDom.ImageLoadtoDOm(miss,button,"miss")
@@ -87,7 +128,7 @@ document.querySelectorAll(selector).forEach(element=>{
     
 }
 
-return {LoadBoard,boardPlayer,computerPlayer,allBoardButtonComputer,allBoardButtonsUser,clearButton};
+return {LoadBoard,LoadBoardComputer,boardPlayer,computerPlayer,allBoardButtonComputer,allBoardButtonsUser,clearButton};
 })()
 
 let buttonManager=(()=>{
@@ -100,7 +141,7 @@ let buttonManager=(()=>{
        
         shipMovement.playerTwo.board.receiveAttack(new shipClasses.coordinates(xCoordinate,yCoordinate),shipMovement.playerTwo.board.playerBoard);
         
-        loadIconsOnButtons.LoadBoard(shipMovement.playerTwo.board.playerBoard,loadIconsOnButtons.allBoardButtonComputer);
+        loadIconsOnButtons.LoadBoardComputer(shipMovement.playerTwo.board.playerBoard,loadIconsOnButtons.allBoardButtonComputer);
         computersTurn();
 
         console.log(shipMovement.playerOne.board.playerBoard,shipMovement.playerTwo.board.playerBoard)
@@ -111,7 +152,7 @@ let buttonManager=(()=>{
         shipMovement.playerOne.board.receiveAttack(new shipClasses.coordinates(xCoordinate,yCoordinate),shipMovement.playerOne.board.playerBoard);
         
         loadIconsOnButtons.LoadBoard(shipMovement.playerOne.board.playerBoard,loadIconsOnButtons.allBoardButtonsUser);
-        loadIconsOnButtons.LoadBoard(shipMovement.playerTwo.board.playerBoard,loadIconsOnButtons.allBoardButtonComputer);
+        loadIconsOnButtons.LoadBoardComputer(shipMovement.playerTwo.board.playerBoard,loadIconsOnButtons.allBoardButtonComputer);
         
         
     }
@@ -119,12 +160,14 @@ let buttonManager=(()=>{
     function computersTurn() {
        
         setTimeout(() => {
+            titleBoardManager.title.textContent="Your Turn"
             loadIconsOnButtons.clearButton('#userGameBoard #icon')
             gettingAttacked(shipMovement.getRandomInt(7),shipMovement.getRandomInt(9))
+           
             
-        }, 100);
+        }, 500);
         
-       
+     
     }
 
 
@@ -137,6 +180,7 @@ let buttonManager=(()=>{
                    
                     attackCoordinates(i,x);
                     shipMovement.endGame()
+                    titleBoardManager.title.textContent="Computer's turn"
                   
                 
             })
@@ -150,6 +194,7 @@ let buttonManager=(()=>{
     }
 
 tieButtonToGrid()
+
 
 
 })()

@@ -1,4 +1,7 @@
 
+*{
+    box-sizing: border-box;
+}
 body{
     display: flex;
     justify-content: center;
@@ -87,6 +90,8 @@ button{
     display: flex;
     justify-content: space-around;
     width: 1000px;
+    gap: 140px;
+   
 }
 
 #shipBoard{
@@ -120,5 +125,19 @@ button{
     
 }
 
+#restart{
+    width: 120px;
+    height: 50px;
+}
 
+#winBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+dialog::backdrop{
 
+    backdrop-filter: blur(12px);
+
+}
