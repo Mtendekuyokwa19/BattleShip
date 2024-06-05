@@ -42,9 +42,12 @@ let body=document.querySelector('body');
 let titleBoard=createElementtoDom.domElementCreator('div',"titleBoard",body)
 
 let GameBoardsHolder=createElementtoDom.domElementCreator('div',"gameBoardHolder",body)
+
+
     let userGameBoard=createElementtoDom.domElementCreator('div',"userGameBoard",GameBoardsHolder);
     let computerGameBoard=createElementtoDom.domElementCreator('div',"computerGameBoard",GameBoardsHolder)
   let shipBoard=createElementtoDom.domElementCreator('div',"shipBoard",body)  
+
 
     return {userGameBoard,computerGameBoard,titleBoard,shipBoard}
   })()
@@ -94,6 +97,7 @@ return{title}
 
     let notice=createElementtoDom.domElementCreator('h1',"noticeBoard",Gameboards.shipBoard);
     notice.textContent="BATTLESHIP"  
+    notice.className="badge bg-orange text-white";
 
   })()
 

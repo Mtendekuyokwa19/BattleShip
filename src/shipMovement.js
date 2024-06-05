@@ -31,7 +31,7 @@ function setUpShips(player) {
    let cordinates6=new shipClasses.coordinates(getRandomInt(6),getRandomInt(6));
    player.board.placeShip(player.board.playerBoard,cordinates6,createShips().carrier);
 
-   for (let i = 0; i < 3; i++) {
+   for (let i = 0; i < 2; i++) {
       let cordinates4=new shipClasses.coordinates(getRandomInt(3+i),getRandomInt(9-i));
    player.board.placeShip(player.board.playerBoard,cordinates4,createShips().submarine);
 
@@ -39,9 +39,11 @@ function setUpShips(player) {
       
    }
 
+  
 
 
-for (let index = 0; index<4; index++) {
+
+for (let index = 0; index<2; index++) {
     let cordinates3=new shipClasses.coordinates(getRandomInt(6+index),getRandomInt(10-index));
     player.board.placeShip(player.board.playerBoard,cordinates3,createShips().destroyer);
 
@@ -49,7 +51,9 @@ for (let index = 0; index<4; index++) {
 };
 
 [createShips().battleship,createShips().carrier,createShips().cruiser].forEach(ship=>{
-   player.board.addShip(ship);
+   player.board.addShip(ship);function setUpshipsUser() {
+   
+   }
 })
 
 
@@ -105,6 +109,6 @@ function getRandomInt(max) {
    return Math.floor(Math.random() * max);
  }
 
-return{play,setUpShips,playerOne,playerTwo,getRandomInt,endGame}
+return{play,setUpShips,playerOne,playerTwo,getRandomInt,endGame,createShips}
 
 })()

@@ -15,7 +15,7 @@ body{
 #gameBoardHolder{
     /* border: blue solid 3px; */
     display: flex;
-    width: 1000px;
+    width: 1200px;
     height: 450px;
     justify-content: space-between;
 
@@ -140,4 +140,13 @@ dialog::backdrop{
 
     backdrop-filter: blur(12px);
 
+}
+#noticeBoard{
+    padding: 12px;
+}
+#shipList{
+    width: 100px;
+    height: 400px;
+    border: solid red 3px;
+ 
 }

@@ -160,12 +160,12 @@ let buttonManager=(()=>{
     function computersTurn() {
        
         setTimeout(() => {
-            titleBoardManager.title.textContent="Your Turn"
+             titleBoardManager.title.textContent="Your Turn"
             loadIconsOnButtons.clearButton('#userGameBoard #icon')
-            gettingAttacked(shipMovement.getRandomInt(7),shipMovement.getRandomInt(9))
+            gettingAttacked(shipMovement.getRandomInt(10),shipMovement.getRandomInt(10))
            
             
-        }, 500);
+        }, 1000);
         
      
     }

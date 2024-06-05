@@ -201,7 +201,7 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
      }
 
      #placeNorthenShip(opponent,coordinates,Ship){
-        let board=opponent
+        let board=opponent;
         if(Ship.length>coordinates.xCoordinate){
             coordinates.xCoordinate=coordinates.xCoordinate+(Ship.length-coordinates.xCoordinate)-1
         }
@@ -256,6 +256,7 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
             super.length=5;
             this.shipNumberEquivalent=1;
             super.direction=direction;
+            this.shipName="Carrier"
     
         }
     
@@ -269,6 +270,7 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
             super.length=4;
             super.direction=direction;
             this.shipNumberEquivalent=2;
+            this.shipName="Battleship"
         }
     
         
@@ -281,6 +283,7 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
             super.length=3
             this.shipNumberEquivalent=3;
             super.direction=direction;
+            this.shipName="Cruiser"
         }
     }
     
@@ -290,6 +293,8 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
             super.direction=direction;
             super.length=3;
             this.shipNumberEquivalent=4;
+            this.shipName="Submarine"
+
         }
     }
     
@@ -299,6 +304,8 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
             super.length=2;
             this.shipNumberEquivalent=5;
             super.direction=direction
+            this.shipName="Destroyer"
+
             
     }
     }
