@@ -216,6 +216,17 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
         
      }
 
+     spotAvailable(board,ship,coordinates){
+
+        for (let i = coordinates.yCoordinate; i < ship.length; i++) {
+                if (board[coordinates.xCoordinate][i]) {
+
+                    
+                }
+            
+        }
+     }
+
      resetBoard(){
 
         

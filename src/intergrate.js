@@ -51,6 +51,7 @@ function LoadBoard(boardPlayer,allBoardButton) {
                 if (boardPlayer[i][j]>0) {
                     
                    let icon=createElementtoDom.ImageLoadtoDOm(Icon,allBoardButton[counter],"icon") 
+                   buttonManager.disableButton(allBoardButton[counter])
                 }
             }
             counter++;
@@ -194,7 +195,10 @@ let buttonManager=(()=>{
     }
 
 tieButtonToGrid()
+function disableButton(button) {
+    button.disabled=true;
+    
+}
 
-
-
+return {disableButton}
 })()
