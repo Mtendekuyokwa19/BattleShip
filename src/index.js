@@ -8,7 +8,7 @@ import { tieShipToCoordinate } from "./placeShip.js";
 
 
 
-function play() {
+export function play() {
 tieShipToCoordinate.disableAllButtonsForComputer()
 loadIconsOnButtons.LoadBoardComputer(loadIconsOnButtons.computerPlayer,loadIconsOnButtons.allBoardButtonComputer);
 tieShipToCoordinate.tieButtonToGrid();
@@ -16,4 +16,3 @@ tieShipToCoordinate.tieButtonToGrid();
 }
 
 play()
-

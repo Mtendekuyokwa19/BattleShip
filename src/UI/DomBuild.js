@@ -1,5 +1,6 @@
  
- import './style.css';
+ import { play } from '..';
+import './style.css';
 
 export class createElementtoDom{
 
@@ -110,6 +111,11 @@ return{title}
       let restart=createElementtoDom.domElementCreator('button','restart',winBox,"Restart");
       restart.className="nb-button orange"
 
+
+      restart.addEventListener('click',()=>{
+        play()
+        winBox.close();
+      })
     winBox.showModal();
     }
     

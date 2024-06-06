@@ -190,6 +190,7 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
             coordinates.yCoordinate=(coordinates.yCoordinate-Ship.length)+1
         }
        
+       
         Ship.occupationGrid=new shipRange(coordinates.yCoordinate,coordinates.yCoordinate+Ship.length);
         for (let i = 0; i < Ship.length; i++) {
                 board[coordinates.xCoordinate][coordinates.yCoordinate+i]=Ship.shipNumberEquivalent;
@@ -206,6 +207,7 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
             coordinates.xCoordinate=coordinates.xCoordinate+(Ship.length-coordinates.xCoordinate)-1
         }
         Ship.occupationGrid=new shipRange(coordinates.xCoordinate-Ship.length,coordinates.xCoordinate);
+
         for (let i = 0; i < Ship.length; i++) {
                 board[coordinates.xCoordinate-i][coordinates.yCoordinate]=Ship.shipNumberEquivalent
             
@@ -216,15 +218,19 @@ const ArrayList = require("../node_modules/arraylist/ArrayList");
         
      }
 
-     spotAvailable(board,ship,coordinates){
+     static spotAvailable(board,ship,coordinates){
 
         for (let i = coordinates.yCoordinate; i < ship.length; i++) {
-                if (board[coordinates.xCoordinate][i]) {
+                if (board[coordinates.xCoordinate][i]>0) {
 
-                    
+
+                         
+                    return false
                 }
             
         }
+
+        return true
      }
 
      resetBoard(){

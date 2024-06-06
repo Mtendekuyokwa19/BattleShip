@@ -1,6 +1,6 @@
 import ArrayList from "arraylist";
 import { loadIconsOnButtons } from "./intergrate";
-import { coordinates } from "./ship";
+import shipClasses, { coordinates } from "./ship";
 import { shipMovement } from "./shipMovement";
 import { titleBoardManager } from "./UI/DomBuild";
 
