@@ -2,7 +2,8 @@
 # Battleship Game
 ![Screenshot of the overall setup](./reamePngs/Game.png)
         > *Screenshot of the Web application *
-        
+### Note:
+    Placing of the ships is from west to east, Unless the boxes are not enough        
 
 ## Short Description 🎲
 
@@ -10,7 +11,7 @@ This is a game based on the board game battleship. The main goal of the project 
 
 
  ## Demo 🚴
--  click [Live Preview](https://mtendekuyokwa19.github.io/TaskManagementSystem/)to check it out!
+-  click [Live Preview](https://mtendekuyokwa19.github.io/BattleShip/)to check it out!
 
 #### Installation
 1. clone the repo
