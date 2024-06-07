@@ -1,152 +1,149 @@
 @import url(/node_modules/neobrutalismcss/dist/index.css);
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap:12px;
-    background-color: #219ebc;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-#gameBoardHolder{
-    /* border: blue solid 3px; */
-    display: flex;
-    width: 1200px;
-    height: 450px;
-    justify-content: space-between;
-
-}
-
-#userGameBoard,#computerGameBoard{
-
-    width: 450px;
-    height: 450px;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 8px;
-
-}
-#userGameBoard, #computerGameBoard{
-   
-
-    button{
-        width: 40px;
-        height: 40px;
-        background-color: white;
-        border: 1.5px solid black;
-        box-shadow:  3px 3px  black;
-        border-radius: 10px;
-    }
-    
-
-    box-shadow:  8px 8px  black;
-    border: solid black 3px;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #219ebc;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
 }
 
-#computerGameBoard{
-    background-color: #FF8577;
-
-    button:hover{
-        background-color: #d90429;
-    }
-}
-#userGameBoard{
-    background-color: #699BF7;
-}
-#shipBoard{
-    width: 500px;
-    height: 150px;
-
+#gameBoardHolder {
+  /* border: blue solid 3px; */
+  display: flex;
+  width: 1200px;
+  height: 450px;
+  justify-content: space-between;
 }
 
-button{
-    background-color: blue;
-    width: 30px;
-    height: 30px;
+#userGameBoard,
+#computerGameBoard {
+  width: 450px;
+  height: 450px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 8px;
 }
-
-#playerButton, #computerButton{
+#userGameBoard,
+#computerGameBoard {
+  button {
+    width: 40px;
+    height: 40px;
     background-color: white;
-    width: 150px;
-    font-size: 16px;
-    height: 50px;
-    border-radius: 12px;
-    box-shadow: 6px 6px black;
-    border: 2px solid black;
-}
-#userGameBoard>div, #computerGameBoard>div{
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: space-evenly;
+    border: 1.5px solid black;
+    box-shadow: 3px 3px black;
+    border-radius: 10px;
+  }
+
+  box-shadow: 8px 8px black;
+  border: solid black 3px;
 }
 
-#titleBoard{
-    display: flex;
-    justify-content: space-around;
-    width: 1000px;
-    gap: 140px;
-   
+#computerGameBoard {
+  background-color: #ff8577;
+
+  button:hover {
+    background-color: #d90429;
+  }
+}
+#userGameBoard {
+  background-color: #699bf7;
+}
+#shipBoard {
+  width: 500px;
+  height: 150px;
 }
 
-#shipBoard{
-
-    width: 700px;
-    height: 70px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* border: solid red 3px; */
+button {
+  background-color: blue;
+  width: 30px;
+  height: 30px;
 }
 
-#icon{
-
-    width: 25px;
-    height: 25px;
-    
-
+#playerButton,
+#computerButton {
+  background-color: white;
+  width: 150px;
+  font-size: 16px;
+  height: 50px;
+  border-radius: 12px;
+  box-shadow: 6px 6px black;
+  border: 2px solid black;
 }
-#hit{
-    width: 23px;
-    height: 21.5px;
-}
-
-#miss{
-   
-    width: 23px;
-    height: 21.5px;
-    
-    
+#userGameBoard > div,
+#computerGameBoard > div {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-evenly;
 }
 
-#restart{
-    width: 120px;
-    height: 50px;
+#titleBoard {
+  display: flex;
+  justify-content: space-around;
+  width: 1000px;
+  gap: 140px;
 }
 
-#winBox{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-dialog::backdrop{
+#shipBoard {
+  width: 700px;
+  height: 70px;
 
-    backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: solid red 3px; */
+}
 
+#icon {
+  width: 25px;
+  height: 25px;
 }
-#noticeBoard{
-    padding: 12px;
+#hit {
+  width: 23px;
+  height: 21.5px;
 }
-#shipList{
-    width: 100px;
-    height: 400px;
-    border: solid red 3px;
- 
+
+#miss {
+  width: 23px;
+  height: 21.5px;
+}
+
+#restart {
+  width: 120px;
+  height: 50px;
+}
+
+#winBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+dialog::backdrop {
+  backdrop-filter: blur(12px);
+}
+#noticeBoard {
+  padding: 12px;
+}
+#shipList {
+  width: 100px;
+  height: 400px;
+  border: solid red 3px;
 }

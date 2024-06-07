@@ -1,134 +1,143 @@
- 
- import { Restart, RestartGame, play } from '..';
-import './style.css';
+/* eslint-disable no-unused-vars */
+import { RestartGame } from "..";
+import "./style.css";
 
-export class createElementtoDom{
+export class createElementtoDom {
+  static domElementCreator(
+    type,
+    newId,
+    parentBox,
+    Words = "",
+    placeholderWords = "",
+  ) {
+    let newElement = document.createElement(type);
+    newElement.id = newId;
+    newElement.textContent = Words;
+    newElement.placeholder = placeholderWords;
+    parentBox.appendChild(newElement);
 
-    static domElementCreator(type,newId,parentBox,Words="",placeholderWords=""){
-      let newElement=document.createElement(type)
-      newElement.id=newId;
-      newElement.textContent=Words
-      newElement.placeholder=placeholderWords;
-      parentBox.appendChild(newElement);
-      
-      return newElement;
-      
-      }
-     static ImageLoadtoDOm(Icon,parentBox,idName) {
-      
-        let myIcon = new Image();
-        myIcon.src = Icon;
-        myIcon.id=idName;
-        parentBox.appendChild(myIcon);
-      
-        return myIcon;
-          
-      }
-
-      static deleteChild(parentSelector,childSelector){
-        
-      // parentSelector.removeChild(childSelector);
-      }
-
-      static deleteElement(element){
-        element.remove();
-      }
-      
-  
-  
+    return newElement;
   }
-  
-  export let Gameboards=(()=>{
-let body=document.querySelector('body');
-let titleBoard=createElementtoDom.domElementCreator('div',"titleBoard",body)
+  static ImageLoadtoDOm(Icon, parentBox, idName) {
+    let myIcon = new Image();
+    myIcon.src = Icon;
+    myIcon.id = idName;
+    parentBox.appendChild(myIcon);
 
-let GameBoardsHolder=createElementtoDom.domElementCreator('div',"gameBoardHolder",body)
-
-
-    let userGameBoard=createElementtoDom.domElementCreator('div',"userGameBoard",GameBoardsHolder);
-    let computerGameBoard=createElementtoDom.domElementCreator('div',"computerGameBoard",GameBoardsHolder)
-  let shipBoard=createElementtoDom.domElementCreator('div',"shipBoard",body)  
+    return myIcon;
+  }
 
 
-    return {userGameBoard,computerGameBoard,titleBoard,shipBoard}
-  })()
 
+  static deleteElement(element) {
+    element.remove();
+  }
+}
 
-  let GameBoardManager=(()=>{
-   
-    function shipButtons(board) {
+export let Gameboards = (() => {
+  let body = document.querySelector("body");
+  let titleBoard = createElementtoDom.domElementCreator(
+    "div",
+    "titleBoard",
+    body,
+  );
 
-      for (let i = 0; i < 10; i++) {
-        let lineSetGrid=createElementtoDom.domElementCreator("div","lineGrid"+i,board)
+  let GameBoardsHolder = createElementtoDom.domElementCreator(
+    "div",
+    "gameBoardHolder",
+    body,
+  );
 
-        for (let x = 0; x <10; x++) {
-          let button=createElementtoDom.domElementCreator("button","button"+i,lineSetGrid)
-          button.className="buttonUser"
-       
-          
-          
-        }
-        
+  let userGameBoard = createElementtoDom.domElementCreator(
+    "div",
+    "userGameBoard",
+    GameBoardsHolder,
+  );
+  let computerGameBoard = createElementtoDom.domElementCreator(
+    "div",
+    "computerGameBoard",
+    GameBoardsHolder,
+  );
+  let shipBoard = createElementtoDom.domElementCreator(
+    "div",
+    "shipBoard",
+    body,
+  );
+
+  return { userGameBoard, computerGameBoard, titleBoard, shipBoard };
+})();
+
+let GameBoardManager = (() => {
+  function shipButtons(board) {
+    for (let i = 0; i < 10; i++) {
+      let lineSetGrid = createElementtoDom.domElementCreator(
+        "div",
+        "lineGrid" + i,
+        board,
+      );
+
+      for (let x = 0; x < 10; x++) {
+        let button = createElementtoDom.domElementCreator(
+          "button",
+          "button" + i,
+          lineSetGrid,
+        );
+        button.className = "buttonUser";
       }
-      
-
     }
+  }
 
-    shipButtons(Gameboards.userGameBoard);
-    shipButtons(Gameboards.computerGameBoard)
+  shipButtons(Gameboards.userGameBoard);
+  shipButtons(Gameboards.computerGameBoard);
+})();
 
-  })()
-  
-  export let titleBoardManager=(()=>{
+export let titleBoardManager = (() => {
+  let playerButton = createElementtoDom.domElementCreator(
+    "button",
+    "playerButton",
+    Gameboards.titleBoard,
+  );
+  playerButton.textContent = "Your Board";
 
-    
-    
+  let title = createElementtoDom.domElementCreator(
+    "h2",
+    "title",
+    Gameboards.titleBoard,
+    "Let's Play",
+  );
+  let computerButton = createElementtoDom.domElementCreator(
+    "button",
+    "computerButton",
+    Gameboards.titleBoard,
+  );
+  computerButton.textContent = "Computer's Board";
 
-    let playerButton=createElementtoDom.domElementCreator('button',"playerButton",Gameboards.titleBoard)
-    playerButton.textContent="Your Board"
+  return { title };
+})();
 
-    let title=createElementtoDom.domElementCreator('h2',"title",Gameboards.titleBoard,"Let's Play")
-    let computerButton=createElementtoDom.domElementCreator('button',"computerButton",Gameboards.titleBoard)
-    computerButton.textContent="Computer's Board"
+let noticeBoad = (() => {
+  let notice = createElementtoDom.domElementCreator(
+    "h1",
+    "noticeBoard",
+    Gameboards.shipBoard,
+  );
+  notice.textContent = "BATTLESHIP";
+  notice.className = "badge bg-orange text-white";
+})();
 
-return{title}
-  })()
+export let modalForWin = (() => {
+  let winBox = document.querySelector("dialog");
+  let statusMessage = document.querySelector("dialog>p");
 
-  let noticeBoad=(()=>{
+  function showMessage(message) {
+    statusMessage.textContent = message;
 
-    let notice=createElementtoDom.domElementCreator('h1',"noticeBoard",Gameboards.shipBoard);
-    notice.textContent="BATTLESHIP"  
-    notice.className="badge bg-orange text-white";
+    winBox.showModal();
+    document.querySelector("#restart").addEventListener("click", (_e) => {
+      RestartGame();
+      winBox.close();
+    });
+  }
 
-  })()
-
-  export let modalForWin=(()=>{
-    let winBox=document.querySelector('dialog')
-    let statusMessage=document.querySelector('dialog>p')
-   
-   
-    
-   
-   
-    function showMessage(message) {
-      statusMessage.textContent=message;
-    
-      
-      winBox.showModal();
-    document.querySelector("#restart").addEventListener('click',(e)=>{
-        RestartGame();
-        winBox.close()
-      })
-     
-
-     
-   
-    }
-  
- 
-   
-   
-    
-
-return {showMessage}
-  })()
+  return { showMessage };
+})();
