@@ -12,7 +12,8 @@ export function play() {
 tieShipToCoordinate.disableAllButtonsForComputer()
 loadIconsOnButtons.LoadBoardComputer(loadIconsOnButtons.computerPlayer,loadIconsOnButtons.allBoardButtonComputer);
 tieShipToCoordinate.tieButtonToGrid();
-    
+
 }
 
 play()
+  

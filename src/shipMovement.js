@@ -81,9 +81,12 @@ function endGame() {
       if(playerOne.board.lostGame()){
          
             modalForWin.showMessage("Sorry,Computer won this round")
+            return
       }
-      else{
+      else(playerTwo.board.lostGame());{
          modalForWin.showMessage("Congratulations!!! You Win")
+
+         return;
       }
    }
    

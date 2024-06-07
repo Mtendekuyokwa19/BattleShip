@@ -149,7 +149,8 @@ let buttonManager=(()=>{
         
      
     }
-    function gettingAttacked(xCoordinate,yCoordinate) {shipMovement.endGame()
+    function gettingAttacked(xCoordinate,yCoordinate) {
+      
         shipMovement.playerOne.board.receiveAttack(new shipClasses.coordinates(xCoordinate,yCoordinate),shipMovement.playerOne.board.playerBoard);
         
         loadIconsOnButtons.LoadBoard(shipMovement.playerOne.board.playerBoard,loadIconsOnButtons.allBoardButtonsUser);
@@ -180,7 +181,7 @@ let buttonManager=(()=>{
             computerButtons[counter].addEventListener('click',()=>{
                    
                     attackCoordinates(i,x);
-                    shipMovement.endGame()
+                    shipMovement.endGame();
                     titleBoardManager.title.textContent="Computer's turn"
                   
                 

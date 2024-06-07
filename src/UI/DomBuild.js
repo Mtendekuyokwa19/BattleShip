@@ -1,5 +1,5 @@
  
- import { play } from '..';
+ import { Restart, play } from '..';
 import './style.css';
 
 export class createElementtoDom{
@@ -103,22 +103,31 @@ return{title}
   })()
 
   export let modalForWin=(()=>{
-
-    function showMessage(message) {
-      let winBox=createElementtoDom.domElementCreator('dialog',"winBox",document.querySelector('body'))
-      let statusMessage=createElementtoDom.domElementCreator('p',"messageModal",winBox,message)
-      winBox.className="dialog"
-      let restart=createElementtoDom.domElementCreator('button','restart',winBox,"Restart");
-      restart.className="nb-button orange"
-
-
-      restart.addEventListener('click',()=>{
-        play()
-        winBox.close();
-      })
-    winBox.showModal();
-    }
+    let winBox=document.querySelector('dialog')
+    let statusMessage=document.querySelector('dialog>p')
+   
+   
     
+   
+   
+    function showMessage(message) {
+      statusMessage.textContent=message;
+    
+      
+      winBox.showModal();
+    document.querySelector("#restart").addEventListener('click',(e)=>{
+        play()
+        winBox.close()
+      })
+     
+
+     
+   
+    }
+  
+ 
+   
+   
     
 
 return {showMessage}
