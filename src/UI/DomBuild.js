@@ -1,5 +1,5 @@
  
- import { Restart, play } from '..';
+ import { Restart, RestartGame, play } from '..';
 import './style.css';
 
 export class createElementtoDom{
@@ -116,7 +116,7 @@ return{title}
       
       winBox.showModal();
     document.querySelector("#restart").addEventListener('click',(e)=>{
-        play()
+        RestartGame();
         winBox.close()
       })
      
