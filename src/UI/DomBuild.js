@@ -67,7 +67,7 @@ export let Gameboards = (() => {
   return { userGameBoard, computerGameBoard, titleBoard, shipBoard };
 })();
 
-let GameBoardManager = (() => {
+export let GameBoardManager = (() => {
   function shipButtons(board) {
     for (let i = 0; i < 10; i++) {
       let lineSetGrid = createElementtoDom.domElementCreator(
@@ -133,11 +133,12 @@ export let modalForWin = (() => {
     statusMessage.textContent = message;
 
     winBox.showModal();
-    document.querySelector("#restart").addEventListener("click", (_e) => {
+    document.querySelector("#restart").addEventListener("click", (e) => {
       RestartGame();
       winBox.close();
     });
   }
+
 
   return { showMessage };
 })();

@@ -5,25 +5,30 @@ import { shipMovement } from "./shipMovement";
 import { titleBoardManager } from "./UI/DomBuild";
 
 export let tieShipToCoordinate = (() => {
-  shipMovement.playerOne.board.ships = new ArrayList();
-  let ships = shipMovement.createShips();
-  shipMovement.playerOne.board.addShip(ships.carrier);
-  shipMovement.playerOne.board.addShip(ships.battleship);
 
-  shipMovement.playerOne.board.addShip(ships.cruiser);
+  function setUpShips(){
+    shipMovement.playerOne.board.ships = new ArrayList();
+    let ships = shipMovement.createShips();
+    shipMovement.playerOne.board.addShip(ships.carrier);
+    shipMovement.playerOne.board.addShip(ships.battleship);
 
-  for (let i = 0; i < 2; i++) {
-    shipMovement.playerOne.board.addShip(ships.submarine);
+    shipMovement.playerOne.board.addShip(ships.cruiser);
+
+    for (let i = 0; i < 2; i++) {
+      shipMovement.playerOne.board.addShip(ships.submarine);
+    }
+    for (let i = 0; i < 2; i++) {
+      shipMovement.playerOne.board.addShip(ships.destroyer);
+    }
   }
-  for (let i = 0; i < 2; i++) {
-    shipMovement.playerOne.board.addShip(ships.destroyer);
-  }
+let ShipCalc={shipNumber:0}
 
   function tieButtonToGrid() {
     shipMovement.playerOne.board.playerBoard =
       shipMovement.playerOne.board.resetBoard();
     let counter = 0;
-    let shipNumber = 0;
+    let shipNumber = ShipCalc.shipNumber;
+    
     titleBoardManager.title.textContent =
       "Place the " +
       shipMovement.playerOne.board.ships.get(shipNumber).shipName;
@@ -33,22 +38,23 @@ export let tieShipToCoordinate = (() => {
           "click",
           () => {
             loadIconsOnButtons.clearButton("#userGameBoard #icon");
-
-            shipMovement.playerOne.board.placeShip(
-              shipMovement.playerOne.board.playerBoard,
-              new coordinates(i, x),
-              shipMovement.playerOne.board.ships.get(shipNumber),
-            );
-
-            loadIconsOnButtons.LoadBoard(
-              shipMovement.playerOne.board.playerBoard,
-              loadIconsOnButtons.allBoardButtonsUser,
-            );
+              
+                shipMovement.playerOne.board.placeShip(
+                  shipMovement.playerOne.board.playerBoard,
+                  new coordinates(i, x),
+                  shipMovement.playerOne.board.ships.get(shipNumber)
+                );
+          
+              loadIconsOnButtons.LoadBoard(
+                shipMovement.playerOne.board.playerBoard,
+                loadIconsOnButtons.allBoardButtonsUser
+              );
 
             shipNumber++;
 
             if (shipNumber == 7) {
               disableAllButton();
+              shipNumber=0;
               return;
             }
             titleBoardManager.title.textContent =
@@ -74,6 +80,7 @@ export let tieShipToCoordinate = (() => {
   function disableAllButtonsForComputer() {
     loadIconsOnButtons.allBoardButtonComputer.forEach((button) => {
       button.disabled = true;
+      button.computedStyleMap.backgroundColor="white"
     });
   }
 
@@ -82,5 +89,5 @@ export let tieShipToCoordinate = (() => {
       button.disabled = false;
     });
   }
-  return { tieButtonToGrid, disableAllButtonsForComputer };
+  return { tieButtonToGrid, disableAllButtonsForComputer,ShipCalc,setUpShips };
 })();

@@ -19,7 +19,7 @@ export let loadIconsOnButtons = (() => {
   );
   let allIcons = document.querySelectorAll("#userGameBoard  #icon");
 
-  function LoadBoard(boardPlayer, allBoardButton) {
+  function LoadBoard(boardPlayer, allBoardButton=allBoardButtonsUser) {
     clearButton();
 
     let counter = 0;
@@ -51,7 +51,7 @@ export let loadIconsOnButtons = (() => {
     }
   }
 
-  function LoadBoardComputer(boardPlayer, allBoardButton) {
+  function LoadBoardComputer(boardPlayer, allBoardButton=allBoardButtonComputer) {
     clearButton();
 
     let counter = 0;
@@ -118,12 +118,11 @@ let buttonManager = (() => {
       shipMovement.playerTwo.board.playerBoard,
       loadIconsOnButtons.allBoardButtonComputer,
     );
-    computersTurn();
-
-    console.log(
-      shipMovement.playerOne.board.playerBoard,
-      shipMovement.playerTwo.board.playerBoard,
-    );
+  
+    if(!shipMovement.endGame()){
+        computersTurn();
+    }
+ 
   }
   function gettingAttacked(xCoordinate, yCoordinate) {
     shipMovement.playerOne.board.receiveAttack(
@@ -158,8 +157,9 @@ let buttonManager = (() => {
       for (let x = 0; x < 10; x++) {
         computerButtons[counter].addEventListener("click", () => {
           attackCoordinates(i, x);
-          shipMovement.endGame();
+         
           titleBoardManager.title.textContent = "Computer's turn";
+          shipMovement.endGame();
         });
 
         counter++;

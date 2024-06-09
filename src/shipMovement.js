@@ -18,7 +18,7 @@ export let shipMovement = (() => {
   }
 
   function setUpShips(player) {
-    console.log("setup the cordinates");
+  
     let cordinates1 = new shipClasses.coordinates(
       getRandomInt(8),
       getRandomInt(2),
@@ -102,14 +102,16 @@ export let shipMovement = (() => {
     if (playerOne.board.lostGame() || playerTwo.board.lostGame()) {
       if (playerOne.board.lostGame()) {
         modalForWin.showMessage("Sorry,Computer won this round");
-        return;
+        return true;
       } else playerTwo.board.lostGame();
       {
         modalForWin.showMessage("Congratulations!!! You Win");
 
-        return;
+        return true;
       }
     }
+
+    return false
   }
 
   function determineWinner() {
